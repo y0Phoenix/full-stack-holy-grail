@@ -1,12 +1,23 @@
 var express = require("express");
+const {createClient} = require('redis');
+
 var app = express();
 
 //TODO: create a redis client
+const client = createClient();
+
+client.connect();
+
+client.set('key', 'value');
+const value = client.get('key');
+
+client.on('error', (err) => console.log('Redis Error', err));
 
 // serve static files from public directory
 app.use(express.static("public"));
 
 // TODO: initialize values for: header, left, right, article and footer using the redis client
+client.set()
 
 // Get values for holy grail layout
 function data() {
