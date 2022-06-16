@@ -1,4 +1,4 @@
-version: '1'
+version: '2'
 services:
   redis:
     build: ./redis/
@@ -10,7 +10,7 @@ services:
       - 6379
   app:
     depends_on:
-      - holy-grail-redis
+      - redis
     build: ./app/
     container_name: holy-grail-app
     restart: unless-stopped
