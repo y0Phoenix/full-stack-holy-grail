@@ -48,7 +48,9 @@ app.get("/update/:key/:value", async (req, res) => {
   const exists = await client.exists(key);
   if (exists < 0) return res.send(`Key Doesn't exist`);
   await client.set(key, value);
-  res.send(`${key} updated`)
+  const Data = await data();
+  console.log(Data);
+  res.send(Data);
 });
 
 // get key data
