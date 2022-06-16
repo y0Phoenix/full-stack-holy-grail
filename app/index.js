@@ -44,9 +44,11 @@ async function data() {
 app.get("/update/:key/:value", async (req, res) => {
   const key = req.params.key;
   let value = Number(req.params.value);
-
-  
   //TODO: use the redis client to update the value associated with the given key
+  const exists = await client.exists(key);
+  if (exists < 0) return res.send(`Key Doesn't exist`);
+  await client.set(key, value);
+  res.send(`${key} updated`)
 });
 
 // get key data
